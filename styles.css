@@ -1,0 +1,36 @@
+* {
+  border: solid red 1px
+}
+
+body {
+  height: 80vh;
+  margin: 0;
+}
+.box-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.left-section {
+  display: flex;
+  /* height: 400px; */
+  width: 75%;
+  height: 100%;
+  margin: 0;
+}
+
+.main-page {
+  display: flex;
+  justify-content: flex-start;
+  height: 80vh;
+  /* align-items: center; */
+}
+
+
+.right-section {
+  /* display: flex; */
+  /* height: 30%; */
+  width: 25%;
+  height: 100%;
+  margin: 0
+}
