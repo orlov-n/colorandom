@@ -1,0 +1,106 @@
+body {
+  font-family: "Comic Sans MS", "Comic Sans";
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  margin: 0px;
+
+}
+h1 {
+font-family: "Comic Sans MS", "Comic Sans";
+font-size: 100px;
+height: 30%;
+width: auto;
+margin-top: 10px;
+
+}
+
+.left-side {
+  height: 100vh;
+  width: 80%;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+  border-right-style: solid;
+  border-color: black;
+}
+
+.palette-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0px;
+}
+
+
+.color-box {
+  height: 175px;
+  width: 175px;
+  border: solid;
+  border-color: black;
+  margin: 10px;
+}
+
+.color-1-box {
+background-color: green;
+}
+
+.color-2-box {
+background-color: red;
+}
+
+.color-3-box {
+background-color: blue;
+}
+
+.color-4-box {
+background-color: orange;
+}
+
+.color-5-box {
+background-color: purple;
+}
+
+.hex-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+p {
+  font-size: 20px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+svg {
+  height: 35px;
+  width: 35px;
+  margin: 0px;
+}
+
+.buttons-bottom {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button-main-page {
+  height: 40px;
+  width: 175px;
+  margin-bottom: 100px;
+  margin-left: 75px;
+  margin-right: 75px;
+}
+
+
+.saved-palette-section {
+  height: 100vh;
+  width: 25%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
