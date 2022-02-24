@@ -12,10 +12,43 @@ window.onload = function() {
   var populatedColors = populateColors()
 }
 
-// function createNewPalette() {
-//   palette = new Palette()
-//   console.log(palette)
-// }
+function populateColors() {
+  var color1 = new Color(randomHexGenerator())
+  var color2 = new Color(randomHexGenerator())
+  var color3 = new Color(randomHexGenerator())
+  var color4 = new Color(randomHexGenerator())
+  var color5 = new Color(randomHexGenerator())
+  var randomColorPalette = [color1, color2, color3, color4, color5]
+
+
+  var currentPalette = createNewPalette(randomColorPalette)
+  return currentPalette
+}
+
+
+function createNewPalette(randomPalette) {
+  palette = new Palette(randomPalette)
+  return palette
+}
+
+
+function makeNewPalette() {
+var populatedColors = populateColors()
+return populatedColors
+}
+
+
+function persistLockedColors(colors) {
+  colors[1].lockColor() // this tests locking color at index 1
+  for (var i = 0; i < colors.length; i++) {
+    if (colors[i].locked === false) {
+      colors.splice(i, 1, new Color(randomHexGenerator()))
+      return colors
+    } else {
+      return
+    }
+  }
+}
 
 function randomHexGenerator() {
   var characters = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
