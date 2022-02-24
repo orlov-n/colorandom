@@ -2,9 +2,12 @@
 // random hex code
 // property of locked, (boolean). Starts as unlocked.
 class Color {
-  constructor() {
-    this.name = 'blue';
+  constructor(randomColor) {
+    this.name = randomColor;
     this.locked = false;
-    this.id = Date.now();
+  }
+
+  lockColor() {
+    this.locked = true;
   }
 };
