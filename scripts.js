@@ -1,16 +1,38 @@
-//Global Variables:
-var palette = null;
-
-// Query Selectors:
 var buttonSave = document.querySelector('#new');
-
-// Event Listeners:
+var paletteContainer = document.querySelector('.palette-container')
 buttonSave.addEventListener('click', makeNewPalette);
 
-//Functions:
+
+
+
+var palette = null;
+
 window.onload = function() {
-  var populatedColors = populateColors()
+ populateColors()
+ renderPalette(palette)
+// console.log(populatedColors)
+// This is how we can lock the color of the first index
+// populatedColors.colors[0].lockColor()
+// console.log(populatedColors.colors[0])
 }
+
+function renderPalette(paletteToRender) {
+  paletteContainer.innerHTML = ''
+  for (var i = 0; i < paletteToRender.colors.length; i++) {
+    paletteContainer.innerHTML +=  `
+    <section>
+    <section class="color-box"></section>
+    <section class="hex-section">
+      <p>${paletteToRender.colors[i].name}</p>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+      </svg>
+    </section>
+  </section>
+    `
+  }
+}
+
 
 function populateColors() {
   var color1 = new Color(randomHexGenerator())
@@ -20,33 +42,36 @@ function populateColors() {
   var color5 = new Color(randomHexGenerator())
   var randomColorPalette = [color1, color2, color3, color4, color5]
 
+  console.log(persistLockedColors(randomColorPalette))
 
   var currentPalette = createNewPalette(randomColorPalette)
   return currentPalette
 }
 
-
 function createNewPalette(randomPalette) {
   palette = new Palette(randomPalette)
+  // console.log(palette)
   return palette
 }
 
-
 function makeNewPalette() {
-var populatedColors = populateColors()
-return populatedColors
+  populateColors()
+  renderPalette(palette)
+
 }
 
-
 function persistLockedColors(colors) {
+  console.log('colors before ', colors)
   colors[1].lockColor() // this tests locking color at index 1
   for (var i = 0; i < colors.length; i++) {
     if (colors[i].locked === false) {
       colors.splice(i, 1, new Color(randomHexGenerator()))
       return colors
-    } else {
-      return
     }
+    //   // colors[i] = new Color(randomHexGenerator())
+    //   console.log('colors after ', colors)
+    //   return
+    // }
   }
 }
 
@@ -62,8 +87,19 @@ function randomHexGenerator() {
     randomColor += value
 
   }
+  console.log(randomColor)
   return randomColor
 }
+
+
+
+
+
+
+
+
+
+
 
 // 2 classes - color and palette each in their own new js file
 
