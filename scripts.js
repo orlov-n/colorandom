@@ -1,8 +1,8 @@
 var buttonSave = document.querySelector('#save');
 var buttonNew = document.querySelector('#new')
 var paletteContainer = document.querySelector('.palette-container');
-var colorBox = document.querySelector('.color-box');
-var paletteContainer = document.querySelector('.palette-container')
+// var colorBox = document.querySelector('.color-box');
+//var paletteContainer = document.querySelector('.palette-container') duplicate?
 var colorBox = document.querySelector('.color-outer-box')
 
 
@@ -41,10 +41,16 @@ function renderPalette(paletteToRender) {
 function onPadlockClick(event) {
   var targetElement = event.target.closest('.color-outer-box')
   var selectedColorIndex = targetElement.dataset.colorIndex
-  palette.lockColorAtIndex(selectedColorIndex)
-  console.log('palette after: ', palette)
+  if (palette.colors[selectedColorIndex].locked) {
+    palette.unlockColorAtIndex(selectedColorIndex)
+  }
+  //console.log(selectedColorIndex)
+  else if (!palette.colors[selectedColorIndex].locked) {
+    palette.lockColorAtIndex(selectedColorIndex)
+  //console.log('palette after: ', palette)
+  //conditional if locked...
 }
-
+};
 
 function populateColors() {
   var color1 = new Color(randomHexGenerator())
@@ -60,6 +66,23 @@ function populateColors() {
   return currentPalette
 }
 
+function populateNewColors() {
+  var randomColorPalette = [];
+    for (var i = 0; i < 5; i++) {
+      if (!palette.colors[i].locked) {
+        var color = new Color(randomHexGenerator())
+         randomColorPalette.push(color)
+      }
+      else if (palette.colors[i].locked) {
+        var color = new Color(palette.colors[i].name)
+          color.lockColor()
+          randomColorPalette.push(color)
+      }
+    }
+    var currentPalette = createNewPalette(randomColorPalette)
+       return currentPalette
+}
+
 function createNewPalette(randomPalette) {
   palette = new Palette(randomPalette)
   // console.log(palette)
@@ -67,9 +90,9 @@ function createNewPalette(randomPalette) {
 }
 
 function makeNewPalette() {
-  populateColors()
+  populateNewColors()
   renderPalette(palette)
-  
+  // conditional to lock color in place?
 }
 
 // function persistLockedColors(colors) {
@@ -82,7 +105,7 @@ function makeNewPalette() {
 //     }
 //       // colors[i] = new Color(randomHexGenerator())
 //       console.log('colors after ', colors)
-      
+
 //     }
 //   }
 
