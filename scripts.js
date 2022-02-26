@@ -1,16 +1,21 @@
 var buttonSave = document.querySelector('#save');
-var buttonNew = document.querySelector('#new')
+var buttonNew = document.querySelector('#new');
 var paletteContainer = document.querySelector('.palette-container');
 // var colorBox = document.querySelector('.color-box');
 //var paletteContainer = document.querySelector('.palette-container') duplicate?
 var colorBox = document.querySelector('.color-outer-box')
+var savedPaletteSection = document.querySelector('.mini-covers')
 
-
+// Add Event Listeners-Buttons
 buttonNew.addEventListener('click', makeNewPalette);
 paletteContainer.addEventListener('click', onPadlockClick);
+buttonSave.addEventListener('click', savePalette);
 
+// Global Variables
 var palette = null;
+var savedPalettes = [];
 
+console.log('line 17', savedPalettes)
 window.onload = function() {
  populateColors()
  renderPalette(palette)
@@ -47,7 +52,7 @@ function onPadlockClick(event) {
   //console.log(selectedColorIndex)
   else if (!palette.colors[selectedColorIndex].locked) {
     palette.lockColorAtIndex(selectedColorIndex)
-  //console.log('palette after: ', palette)
+  console.log('palette after: ', palette)
   //conditional if locked...
 }
 };
@@ -94,6 +99,24 @@ function makeNewPalette() {
   renderPalette(palette)
   // conditional to lock color in place?
 }
+
+// function savePalette(palette) {
+//   if (!savedPalettes.includes(palette)) {
+//     savedPalettes.push(palette)
+//     savedPaletteSection.innerHTML += savedPalettes
+//     console.log(savedPalettes)
+//   }
+// }
+
+  function savePalette() {
+    savedPaletteSection = ''
+    for (var i = 0; i < palette.colors.length; i++) {
+      savedPalettes.push(palette.colors[i].name)
+      savedPaletteSection += `<section class="mini-covers">${palette.colors[i].name}</section>`
+    } console.log(save)
+  }
+
+
 
 // function persistLockedColors(colors) {
 //   console.log('colors before ', colors)
