@@ -14,4 +14,8 @@ class Palette {
 
 
   }
+
+  lockColorAtIndex(colorIndex) {
+    this.colors[colorIndex].lockColor()
+  }
 };

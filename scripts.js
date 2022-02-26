@@ -1,15 +1,20 @@
-var buttonSave = document.querySelector('#new');
+var buttonSave = document.querySelector('#save');
+var buttonNew = document.querySelector('#new')
+var paletteContainer = document.querySelector('.palette-container');
+var colorBox = document.querySelector('.color-box');
 var paletteContainer = document.querySelector('.palette-container')
-buttonSave.addEventListener('click', makeNewPalette);
+var colorBox = document.querySelector('.color-outer-box')
 
 
-
+buttonNew.addEventListener('click', makeNewPalette);
+paletteContainer.addEventListener('click', onPadlockClick);
 
 var palette = null;
 
 window.onload = function() {
  populateColors()
  renderPalette(palette)
+ console.log('this is a palette ', palette)
 // console.log(populatedColors)
 // This is how we can lock the color of the first index
 // populatedColors.colors[0].lockColor()
@@ -20,17 +25,24 @@ function renderPalette(paletteToRender) {
   paletteContainer.innerHTML = ''
   for (var i = 0; i < paletteToRender.colors.length; i++) {
     paletteContainer.innerHTML +=  `
-    <section>
-    <section class="color-box"></section>
-    <section class="hex-section">
-      <p>${paletteToRender.colors[i].name}</p>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-      </svg>
+    <section class="color-outer-box" data-color-index="${i}">
+      <section class="color-box" style="background-color:${paletteToRender.colors[i].name}"></section>
+      <section class="hex-section">
+        <p>${paletteToRender.colors[i].name}</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+        </svg>
+      </section>
     </section>
-  </section>
     `
   }
+}
+
+function onPadlockClick(event) {
+  var targetElement = event.target.closest('.color-outer-box')
+  var selectedColorIndex = targetElement.dataset.colorIndex
+  palette.lockColorAtIndex(selectedColorIndex)
+  console.log('palette after: ', palette)
 }
 
 
@@ -42,7 +54,7 @@ function populateColors() {
   var color5 = new Color(randomHexGenerator())
   var randomColorPalette = [color1, color2, color3, color4, color5]
 
-  console.log(persistLockedColors(randomColorPalette))
+  //console.log(persistLockedColors(randomColorPalette))
 
   var currentPalette = createNewPalette(randomColorPalette)
   return currentPalette
@@ -57,23 +69,22 @@ function createNewPalette(randomPalette) {
 function makeNewPalette() {
   populateColors()
   renderPalette(palette)
-
+  
 }
 
-function persistLockedColors(colors) {
-  console.log('colors before ', colors)
-  colors[1].lockColor() // this tests locking color at index 1
-  for (var i = 0; i < colors.length; i++) {
-    if (colors[i].locked === false) {
-      colors.splice(i, 1, new Color(randomHexGenerator()))
-      return colors
-    }
-    //   // colors[i] = new Color(randomHexGenerator())
-    //   console.log('colors after ', colors)
-    //   return
-    // }
-  }
-}
+// function persistLockedColors(colors) {
+//   console.log('colors before ', colors)
+//   colors[1].lockColor() // this tests locking color at index 1
+//   for (var i = 0; i < colors.length; i++) {
+//     if (colors[i].locked === false) {
+//       colors.splice(i, 1, new Color(randomHexGenerator()))
+//       // return colors
+//     }
+//       // colors[i] = new Color(randomHexGenerator())
+//       console.log('colors after ', colors)
+      
+//     }
+//   }
 
 function randomHexGenerator() {
   var characters = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
@@ -90,28 +101,3 @@ function randomHexGenerator() {
   console.log(randomColor)
   return randomColor
 }
-
-
-
-
-
-
-
-
-
-
-
-// 2 classes - color and palette each in their own new js file
-
-//Color:
-// random hex code
-// property of locked, (boolean). Starts as unlocked.
-
-//Palette:
-// on page load, a new instance of Palette will be declared.
-// old palette is saved
-// It should have 5 Colors
-// It should have a unique ID
-// It should be able to replace the Colors with new Colors
-// It should be able to lock Colors
-// It should only replace unlocked Colors
