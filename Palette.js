@@ -14,4 +14,11 @@ class Palette {
 
 
   }
+
+  lockColorAtIndex(colorIndex) {
+    this.colors[colorIndex].lockColor()
+  }
+  unlockColorAtIndex(colorIndex) {
+    this.colors[colorIndex].unlockColor()
+  }
 };
