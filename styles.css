@@ -1,3 +1,4 @@
+
 body {
   font-family: "Comic Sans MS", "Comic Sans";
   height: 100vh;
@@ -106,6 +107,44 @@ svg {
   align-items: center;
 }
 
-.mini-covers {
+.section {
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0px;
+}
 
+.mini-colors-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.mini-colors {
+  height: 40px;
+  width: 40px;
+  border: solid;
+  border-color: black;
+  margin: 0px;
+}
+
+.mini-1-colors {
+  background-color: red;
+}
+
+.mini-2-colors {
+  background-color: blue;
+}
+
+.mini-3-colors {
+  background-color: red;
+}
+
+.mini-4-colors {
+  background-color: orange;
+}
+
+.mini-5-colors {
+  background-color: black;
 }

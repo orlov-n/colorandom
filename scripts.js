@@ -52,7 +52,7 @@ function onPadlockClick(event) {
   //console.log(selectedColorIndex)
   else if (!palette.colors[selectedColorIndex].locked) {
     palette.lockColorAtIndex(selectedColorIndex)
-  console.log('palette after: ', palette)
+  //console.log('palette after: ', palette)
   //conditional if locked...
 }
 };
@@ -67,8 +67,9 @@ function populateColors() {
 
   //console.log(persistLockedColors(randomColorPalette))
 
-  var currentPalette = createNewPalette(randomColorPalette)
-  return currentPalette
+  // var currentPalette =
+  createNewPalette(randomColorPalette)
+  // return currentPalette
 }
 
 function populateNewColors() {
@@ -84,8 +85,9 @@ function populateNewColors() {
           randomColorPalette.push(color)
       }
     }
-    var currentPalette = createNewPalette(randomColorPalette)
-       return currentPalette
+    // var currentPalette =
+    createNewPalette(randomColorPalette)
+       // return currentPalette
 }
 
 function createNewPalette(randomPalette) {
@@ -109,12 +111,19 @@ function makeNewPalette() {
 // }
 
   function savePalette() {
-    savedPaletteSection = ''
+    savedPaletteSection.innerHTML = ""
+    savedPalettes.push(palette)
     for (var i = 0; i < palette.colors.length; i++) {
-      savedPalettes.push(palette.colors[i].name)
-      savedPaletteSection += `<section class="mini-covers">${palette.colors[i].name}</section>`
-    } console.log(save)
+      savedPaletteSection.innerHTML += `<section class="mini-colors-container">
+              <section class="mini-1-colors mini-colors"></section>
+              <section class="mini-2-colors mini-colors"></section>
+              <section class="mini-3-colors mini-colors"></section>
+              <section class="mini-4-colors mini-colors"></section>
+              <section class="mini-5-colors mini-colors"></section>
+            </section>`
+    }
   }
+
 
 
 
