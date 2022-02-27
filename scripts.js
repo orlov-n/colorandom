@@ -1,10 +1,11 @@
 var buttonSave = document.querySelector('#save');
 var buttonNew = document.querySelector('#new');
 var paletteContainer = document.querySelector('.palette-container');
+// var imageLock = document.querySelector('.image-lock')
 // var colorBox = document.querySelector('.color-box');
 //var paletteContainer = document.querySelector('.palette-container') duplicate?
 var colorBox = document.querySelector('.color-outer-box')
-var savedPaletteSection = document.querySelector('.mini-covers')
+var savedPaletteSection = document.querySelector('.saved-palette-section')
 
 // Add Event Listeners-Buttons
 buttonNew.addEventListener('click', makeNewPalette);
@@ -18,8 +19,11 @@ var savedPalettes = [];
 console.log('line 17', savedPalettes)
 window.onload = function() {
  populateColors()
+//  console.log(imageLock)
+//  console.log(savedPalettes[4].colors[4].name)
+
  renderPalette(palette)
- console.log('this is a palette ', palette)
+//  console.log('this is a palette ', palette)
 // console.log(populatedColors)
 // This is how we can lock the color of the first index
 // populatedColors.colors[0].lockColor()
@@ -34,7 +38,7 @@ function renderPalette(paletteToRender) {
       <section class="color-box" style="background-color:${paletteToRender.colors[i].name}"></section>
       <section class="hex-section">
         <p>${paletteToRender.colors[i].name}</p>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="image-lock" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
         </svg>
       </section>
@@ -111,20 +115,25 @@ function makeNewPalette() {
 // }
 
   function savePalette() {
-    savedPaletteSection.innerHTML = ""
-    savedPalettes.push(palette)
-    for (var i = 0; i < palette.colors.length; i++) {
+    // savedPaletteSection.innerHTML = ""
+    // console.log(savedPalettes[4].colors[4].name)
+    savedPalettes.unshift(palette)
+    // console.log(savedPalettes[4].colors[4].name)
+    
+    // for (var i = 0; i < palette.colors.length; i++) {
       savedPaletteSection.innerHTML += `<section class="mini-colors-container">
-              <section class="mini-1-colors mini-colors"></section>
-              <section class="mini-2-colors mini-colors"></section>
-              <section class="mini-3-colors mini-colors"></section>
-              <section class="mini-4-colors mini-colors"></section>
-              <section class="mini-5-colors mini-colors"></section>
-            </section>`
+      <section class="mini-1-colors mini-colors" style="background-color:${savedPalettes[0].colors[0].name}"></section>
+      <section class="mini-2-colors mini-colors" style="background-color:${savedPalettes[0].colors[1].name}"></section>
+      <section class="mini-3-colors mini-colors" style="background-color:${savedPalettes[0].colors[2].name}"></section>
+      <section class="mini-4-colors mini-colors" style="background-color:${savedPalettes[0].colors[3].name}"></section>
+      <section class="mini-5-colors mini-colors" style="background-color:${savedPalettes[0].colors[4].name}"></section>
+      </section>`
+      // console.log(savedPalettes[4].colors[4].name)
     }
-  }
+    // console.log(savedPalettes[4].colors[4].name)
+  
 
-
+// 
 
 
 // function persistLockedColors(colors) {
