@@ -32,33 +32,56 @@ window.onload = function() {
 
 function renderPalette(paletteToRender) {
   paletteContainer.innerHTML = ''
-  for (var i = 0; i < paletteToRender.colors.length; i++) {
-    paletteContainer.innerHTML +=  `
-    <section class="color-outer-box" data-color-index="${i}">
-      <section class="color-box" style="background-color:${paletteToRender.colors[i].name}"></section>
-      <section class="hex-section">
-        <p>${paletteToRender.colors[i].name}</p>
-        <svg class="image-lock" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+   for (var i = 0; i < paletteToRender.colors.length; i++) {
+     if (!palette.colors[i].locked) {
+
+       paletteContainer.innerHTML += `
+       <section class="color-outer-box" data-color-index="${i}">
+         <section class="color-box" style="background-color:${paletteToRender.colors[i].name}" data-color-index="${i}"></section>
+         <section class="hex-section">
+           <p>${paletteToRender.colors[i].name}</p>
+           <svg class="image-lock" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+           </svg>
+         </section>
+       </section>
+       `
+     } else {
+      paletteContainer.innerHTML += `
+      <section class="color-outer-box" data-color-index="${i}">
+        <section class="color-box" style="background-color:${paletteToRender.colors[i].name}" data-color-index="${i}"></section>
+        <section class="hex-section">
+          <p>${paletteToRender.colors[i].name}</p>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
+        </section>
       </section>
-    </section>
-    `
+      `
+     }
   }
 }
 
 function onPadlockClick(event) {
-  var targetElement = event.target.closest('.color-outer-box')
-  var selectedColorIndex = targetElement.dataset.colorIndex
+  // var targetElement = event.target.closest('.color-outer-box')
+  if (!event.target.dataset.colorIndex) {
+   return
+  }
+  var selectedColorIndex = event.target.dataset.colorIndex
+  // var selectedColorIndex = targetElement.dataset.colorIndex
   if (palette.colors[selectedColorIndex].locked) {
     palette.unlockColorAtIndex(selectedColorIndex)
   }
   //console.log(selectedColorIndex)
   else if (!palette.colors[selectedColorIndex].locked) {
     palette.lockColorAtIndex(selectedColorIndex)
+    
+    
   //console.log('palette after: ', palette)
   //conditional if locked...
 }
+renderPalette(palette)
+
 };
 
 function populateColors() {
@@ -127,7 +150,10 @@ function makeNewPalette() {
       <section class="mini-3-colors mini-colors" style="background-color:${savedPalettes[0].colors[2].name}"></section>
       <section class="mini-4-colors mini-colors" style="background-color:${savedPalettes[0].colors[3].name}"></section>
       <section class="mini-5-colors mini-colors" style="background-color:${savedPalettes[0].colors[4].name}"></section>
-      </section>`
+      <section class="delete-icon mini-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    </svg></section>
+      </section> `
       // console.log(savedPalettes[4].colors[4].name)
     }
     // console.log(savedPalettes[4].colors[4].name)
