@@ -13,7 +13,6 @@ buttonSave.addEventListener('click', savePalette);
 var palette = null;
 var savedPalettes = [];
 
-console.log('line 17', savedPalettes)
 window.onload = function() {
  populateColors()
 
@@ -143,6 +142,5 @@ function randomHexGenerator() {
     randomColor += value
 
   }
-  console.log(randomColor)
   return randomColor
 }
