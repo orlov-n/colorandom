@@ -1,7 +1,7 @@
 
 class Color {
   constructor(randomColor) {
-    this.name = randomColor; 
+    this.name = randomColor;
     this.locked = false;
   }
 
@@ -12,4 +12,4 @@ class Color {
   unlockColor() {
     this.locked = false;
   }
-};
+}
