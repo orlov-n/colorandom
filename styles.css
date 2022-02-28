@@ -1,6 +1,5 @@
-* {
-  border: solid pink 2px
-}
+
+
 body {
   font-family: "Comic Sans MS", "Comic Sans";
   height: 100vh;
@@ -122,8 +121,7 @@ svg {
   display: flex;
   justify-content: center;
   width: 100%;
-  /* margin: 20px; */
-  
+
   margin-bottom: 15px;
 }
 
@@ -132,7 +130,7 @@ svg {
   width: 40px;
   border: solid;
   border-color: black;
-  margin: 10px;
+  margin: ;
 }
 
 .mini-1-colors {
