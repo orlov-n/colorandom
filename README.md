@@ -1,7 +1,5 @@
 <h1>Colorandom: Group Project</h1>
-<h2>Deploy Link</h2>
-<ul>
-<li>https://orlovorlov.github.io/colorandom/</li>
+
   <h2>Project Overview</h2>
       <p>This was our group project as part of the Turing Front End Program. Our goal was to build a site that generates color palettes, with the following functionality:
       <ul>
